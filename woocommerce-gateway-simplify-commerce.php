@@ -31,6 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Required minimums
  */
 define( 'WC_SIMPLIFY_COMMERCE_MIN_PHP_VER', '5.3.0' );
+define( 'WC_SIMPLIFY_COMMERCE_MIN_WC_VER', '2.6.0' );
 define( 'WC_SIMPLIFY_COMMERCE_FILE', __FILE__ );
 
 class WC_Gateway_Simplify_Commerce_Loader {
@@ -146,6 +147,15 @@ class WC_Gateway_Simplify_Commerce_Loader {
 				$message = __( 'The WooCommerce Simplify Commerce plugin has been deactivated. The minimum PHP version required for this plugin is %1$s. You are running %2$s.', 'woocommerce-gateway-simplify-commerce' );
 			}
 			return sprintf( $message, WC_SIMPLIFY_COMMERCE_MIN_PHP_VER, phpversion() );
+		}
+
+		if ( version_compare( WC_VERSION, WC_SIMPLIFY_COMMERCE_MIN_WC_VER, '<' ) ) {
+			if ( $during_activation ) {
+				$message = __( 'The plugin could not be activated. The minimum WooCommerce version required for this plugin is %1$s. You are running %2$s.', 'woocommerce-gateway-simplify-commerce', 'woocommerce-gateway-simplify-commerce' );
+			} else {
+				$message = __( 'The WooCommerce Simplify Commerce plugin has been deactivated. The minimum WooCommerce version required for this plugin is %1$s. You are running %2$s.', 'woocommerce-gateway-simplify-commerce' );
+			}
+			return sprintf( $message, WC_SIMPLIFY_COMMERCE_MIN_WC_VER, WC_VERSION );
 		}
 
 		if ( ! function_exists( 'curl_init' ) ) {
