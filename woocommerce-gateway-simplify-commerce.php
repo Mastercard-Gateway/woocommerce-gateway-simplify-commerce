@@ -164,9 +164,8 @@ class WC_Gateway_Simplify_Commerce_Loader {
 	 * @since 1.0.0
 	 */
 	public function plugin_action_links( $links ) {
-		$section_slug = strtolower( 'WC_Gateway_Simplify_Commerce' );
 		$plugin_links = array(
-			'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=' . $section_slug ) . '">' . __( 'Settings', 'woocommerce-gateway-simplify-commerce' ) . '</a>',
+			'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout&section=simplify_commerce' ) . '">' . __( 'Settings', 'woocommerce-gateway-simplify-commerce' ) . '</a>',
 			'<a href="https://docs.woothemes.com/document/simplify-commerce/">' . __( 'Docs', 'woocommerce-gateway-simplify-commerce' ) . '</a>',
 			'<a href="http://support.woothemes.com/">' . __( 'Support', 'woocommerce-gateway-simplify-commerce' ) . '</a>',
 		);
