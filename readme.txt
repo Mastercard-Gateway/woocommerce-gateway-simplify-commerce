@@ -82,6 +82,11 @@ For help setting up and configuring, please refer to our [user guide](https://do
 
 If you get stuck, you can ask for help in the Plugin Forum.
 
+== Screenshots ==
+
+1. The settings panel used to configure the gateway.
+2. Normal checkout with Simplify commerce.
+
 == Changelog ==
 
 = 1.0.0 =
