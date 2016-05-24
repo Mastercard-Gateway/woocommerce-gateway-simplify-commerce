@@ -85,13 +85,21 @@ class WC_Gateway_Simplify_Commerce_Loader {
 	protected function __construct() {
 		add_action( 'admin_init', array( $this, 'check_environment' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ), 15 );
+		add_action( 'plugins_loaded', array( $this, 'init' ) );
+	}
 
+	/**
+	 * Init the plugin after plugins_loaded so environment variables are set.
+	 */
+	public function init() {
 		// Don't hook anything else in the plugin if we're in an incompatible environment
 		if ( self::get_environment_warning() ) {
 			return;
 		}
 
-		add_action( 'plugins_loaded', array( $this, 'init_gateways' ), 0 );
+		// Init the gateway itself
+		$this->init_gateways();
+
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 	}
 
