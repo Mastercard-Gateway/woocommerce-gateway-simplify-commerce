@@ -39,6 +39,7 @@ class WC_Addons_Gateway_Simplify_Commerce extends WC_Gateway_Simplify_Commerce {
 
 		add_filter( 'woocommerce_simplify_commerce_hosted_args', array( $this, 'hosted_payment_args' ), 10, 2 );
 		add_action( 'woocommerce_api_wc_addons_gateway_simplify_commerce', array( $this, 'return_handler' ) );
+		add_action( 'woocommerce_api_wc_gateway_simplify_commerce', array( $this, 'return_handler' ) );
 	}
 
 	/**
@@ -484,7 +485,7 @@ class WC_Addons_Gateway_Simplify_Commerce extends WC_Gateway_Simplify_Commerce {
 			$amount      = absint( $_REQUEST['amount'] );
 			$order_id    = absint( $_REQUEST['reference'] );
 			$order       = wc_get_order( $order_id );
-			$order_total = absint( $order->order_total * 100 );
+			$order_total = absint( $order->get_total() * 100 );
 
 			if ( $amount === $order_total ) {
 				if ( $this->order_contains_subscription( $order->id ) ) {

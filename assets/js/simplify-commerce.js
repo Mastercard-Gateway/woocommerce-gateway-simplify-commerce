@@ -20,12 +20,12 @@
 				var card           = $( '#simplify_commerce-card-number' ).val(),
 					cvc            = $( '#simplify_commerce-card-cvc' ).val(),
 					expiry         = $.payment.cardExpiryVal( $( '#simplify_commerce-card-expiry' ).val() ),
-					address1       = $form.find( '#billing_address_1' ).val(),
-					address2       = $form.find( '#billing_address_2' ).val(),
-					addressCountry = $form.find( '#billing_country' ).val(),
-					addressState   = $form.find( '#billing_state' ).val(),
-					addressCity    = $form.find( '#billing_city' ).val(),
-					addressZip     = $form.find( '#billing_postcode' ).val();
+					address1       = $form.find( '#billing_address_1' ).val() || '',
+					address2       = $form.find( '#billing_address_2' ).val() || '',
+					addressCountry = $form.find( '#billing_country' ).val() || '',
+					addressState   = $form.find( '#billing_state' ).val() || '',
+					addressCity    = $form.find( '#billing_city' ).val() || '',
+					addressZip     = $form.find( '#billing_postcode' ).val() || '';
 
 				addressZip = addressZip.replace( /-/g, '' );
 				card = card.replace( /\s/g, '' );
