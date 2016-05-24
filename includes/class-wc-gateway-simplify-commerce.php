@@ -38,7 +38,6 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 			'subscription_date_changes',
 			'multiple_subscriptions',
 			'default_credit_card_form',
-			'tokenization',
 			'refunds',
 			'pre-orders'
 		);
@@ -61,6 +60,11 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 		$this->private_key     = $this->sandbox == 'no' ? $this->get_option( 'private_key' ) : $this->get_option( 'sandbox_private_key' );
 
 		$this->init_simplify_sdk();
+
+		// Hosted creates payment requests, not tokens.
+		if ( 'hosted' !== $this->mode ) {
+			$this->supports[] = 'tokenization';
+		}
 
 		// Hooks
 		add_action( 'wp_enqueue_scripts', array( $this, 'payment_scripts' ) );
@@ -290,23 +294,12 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 	 * Outputs scripts used for simplify payment.
 	 */
 	public function payment_scripts() {
-		$load_scripts = false;
-
-		if ( is_checkout() ) {
-			$load_scripts = true;
-		}
-		if ( $this->is_available() ) {
-			$load_scripts = true;
-		}
-
-		if ( false === $load_scripts ) {
+		if ( ! $this->is_available() ) {
 			return;
 		}
 
-		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
 		wp_enqueue_script( 'simplify-commerce', 'https://www.simplify.com/commerce/v1/simplify.js', array( 'jquery' ), WC_VERSION, true );
-		wp_enqueue_script( 'wc-simplify-commerce', plugins_url( 'assets/js/simplify-commerce' . $suffix . '.js', WC_SIMPLIFY_COMMERCE_FILE ), array( 'simplify-commerce', 'wc-credit-card-form' ), WC_VERSION, true );
+		wp_enqueue_script( 'wc-simplify-commerce', plugins_url( 'assets/js/simplify-commerce.js', WC_SIMPLIFY_COMMERCE_FILE ), array( 'simplify-commerce', 'wc-credit-card-form' ), WC_VERSION, true );
 		wp_localize_script( 'wc-simplify-commerce', 'Simplify_commerce_params', array(
 			'key'           => $this->public_key,
 			'card.number'   => __( 'Card Number', 'woocommerce' ),
@@ -318,6 +311,9 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 		) );
 	}
 
+	/**
+	 * Add payment method.
+	 */
 	public function add_payment_method() {
 		if ( empty ( $_POST['simplify_token'] ) ) {
 			wc_add_notice( __( 'There was a problem adding this card.', 'woocommerce' ), 'error' );
@@ -628,7 +624,7 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 			'address-state'   => $order->billing_state,
 			'address-zip'     => $order->billing_postcode,
 			'address-country' => $order->billing_country,
-			'operation'       => 'create.token',
+			'operation'       => 'create.payment',
 		), $order->id );
 
 		return $args;
