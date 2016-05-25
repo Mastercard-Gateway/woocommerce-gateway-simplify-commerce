@@ -7,7 +7,7 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-The Simplify Commerce gateway lets you to take credit card payments directly on your store.
+The Simplify Commerce gateway for WooCommerce 2.6+ lets you to take credit card payments directly on your store.
 
 == Description ==
 
@@ -33,6 +33,8 @@ Simplify Commerce by MasterCard gives you a merchant account and payment gateway
 4. You're ready to take payments in your WooCommerce store!
 
 == Installation ==
+
+Please note, this gateway requires WooCommerce 2.6 and above. Prior to 2.6, Simplify Commerce was bundled with WooCommerce core.
 
 = Minimum Requirements =
 
