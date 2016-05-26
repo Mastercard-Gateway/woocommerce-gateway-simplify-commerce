@@ -5,7 +5,7 @@
 	function simplifyFormHandler() {
 		var $form = $( 'form.checkout, form#order_review, form#add_payment_method' );
 
-		if ( ( $( '#payment_method_simplify_commerce' ).is( ':checked' ) && $( '#wc-simplify_commerce-new' ).is( ':checked' ) ) || ( '1' === $( '#woocommerce_add_payment_method' ).val() ) ) {
+		if ( ( $( '#payment_method_simplify_commerce' ).is( ':checked' ) && 'new' === $( 'input[name="wc-simplify_commerce-payment-token"]:checked' ).val() ) || ( '1' === $( '#woocommerce_add_payment_method' ).val() ) ) {
 
 			if ( 0 === $( 'input.simplify-token' ).length ) {
 
