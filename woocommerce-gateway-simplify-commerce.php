@@ -5,7 +5,7 @@
  * Description: The Simplify Commerce gateway lets you to take credit card payments directly on your store. Requires PHP 5.3+
  * Author: Automattic
  * Author URI: http://woothemes.com/
- * Version: 1.0.0
+ * Version: 1.0.1
  *
  * Copyright (c) 2016 Automattic
  *
