@@ -5,7 +5,12 @@
 	function simplifyFormHandler() {
 		var $form = $( 'form.checkout, form#order_review, form#add_payment_method' );
 
-		if ( ( $( '#payment_method_simplify_commerce' ).is( ':checked' ) && 'new' === $( 'input[name="wc-simplify_commerce-payment-token"]:checked' ).val() ) || ( '1' === $( '#woocommerce_add_payment_method' ).val() ) ) {
+		var simplify_checked   = $( '#payment_method_simplify_commerce' ).is( ':checked' );
+		var token_field_count  = $( 'input[name="wc-simplify_commerce-payment-token"]' ).length;
+		var token_value        = $( 'input[name="wc-simplify_commerce-payment-token"]:checked' ).val();
+		var add_payment_method = $( '#wc-simplify_commerce-new-payment-method' ).val();
+
+		if ( simplify_checked && ( ( 0 === token_field_count || 'new' === token_value ) || '1' === add_payment_method ) ) {
 
 			if ( 0 === $( 'input.simplify-token' ).length ) {
 

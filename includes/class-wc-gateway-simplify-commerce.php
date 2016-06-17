@@ -350,35 +350,37 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 	public function save_token( $customer_token, $cart_token, $customer_info ) {
 		if ( ! is_null( $customer_token ) ) {
 			$customer = Simplify_Customer::findCustomer( $customer_token->get_token() );
-			$updates = array( 'token' => $cart_token );
+			$updates  = array( 'token' => $cart_token );
 			$customer->setAll( $updates );
 			$customer->updateCustomer();
 			$customer = Simplify_Customer::findCustomer( $customer_token->get_token() ); // get updated customer with new set card
-			$token = $customer_token;
+			$token    = $customer_token;
 		} else {
 			$customer = Simplify_Customer::createCustomer( array(
-				'token'     => $cart_token,
-				'email'     => $customer_info['email'],
-				'name'      => $customer_info['name'],
+				'token' => $cart_token,
+				'email' => $customer_info['email'],
+				'name'  => $customer_info['name'],
 			) );
 			$token = new WC_Payment_Token_CC();
 			$token->set_token( $customer->id );
 		}
 
 		// If we were able to create an save our card, save the data on our side too
-		if ( is_object( $customer ) && '' != $customer->id ) {
+		if ( is_object( $customer ) && $customer->id ) {
 			$customer_properties = $customer->getProperties();
-			$card = $customer_properties['card'];
+			$card                = $customer_properties['card'];
 			$token->set_gateway_id( $this->id );
 			$token->set_card_type( strtolower( $card->type ) );
 			$token->set_last4( $card->last4 );
-			$expiry_month = ( 1 === strlen( $card->expMonth ) ? '0' . $card->expMonth : $card->expMonth );
-			$token->set_expiry_month( $expiry_month );
+			$token->set_expiry_month( $card->expMonth );
 			$token->set_expiry_year( '20' . $card->expYear );
+
 			if ( is_user_logged_in() ) {
 				$token->set_user_id( get_current_user_id() );
 			}
+
 			$token->save();
+
 			return $token;
 		}
 
@@ -400,6 +402,7 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 				'name'  => trim( $order->get_formatted_billing_full_name() ),
 			);
 			$token = $this->save_token( $customer_token, $cart_token, $customer_info );
+
 			if ( ! is_null( $token ) ) {
 				$order->add_payment_token( $token );
 			}
