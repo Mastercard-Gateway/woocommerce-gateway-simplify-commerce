@@ -4,7 +4,7 @@
  * Plugin URI: https://wordpress.org/plugins/woocommerce-gateway-simplify-commerce/
  * Description: The Simplify Commerce gateway lets you to take credit card payments directly on your store. Requires PHP 5.3+
  * Author: Automattic
- * Author URI: http://woothemes.com/
+ * Author URI: https://woocommerce.com/
  * Version: 1.0.2
  *
  * Copyright (c) 2016 Automattic
