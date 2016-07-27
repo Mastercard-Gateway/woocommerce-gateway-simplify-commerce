@@ -1,5 +1,5 @@
 === WooCommerce Simplify Commerce Gateway ===
-Contributors: automattic, woothemes, akeda, allendav, royho, slash1andy, woosteve, spraveenitpro, mikedmoore, fernashes, shellbeezy, mikejolley
+Contributors: automattic, woothemes, akeda, allendav, royho, slash1andy, woosteve, spraveenitpro, mikedmoore, fernashes, shellbeezy, mikejolley, danieldudzic, dsmithweb
 Tags: credit card, simplify commerce, woocommerce, mastercard
 Requires at least: 4.4
 Tested up to: 4.5
