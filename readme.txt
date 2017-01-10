@@ -78,7 +78,7 @@ Yes it does - production and sandbox mode is driven by the API keys you use.
 
 = Where can I find documentation? =
 
-For help setting up and configuring, please refer to our [user guide](https://docs.woothemes.com/document/simplify-commerce/)
+For help setting up and configuring, please refer to our [user guide](https://docs.woocommerce.com/document/simplify-commerce/)
 
 = Where can I get support or talk to other users? =
 
