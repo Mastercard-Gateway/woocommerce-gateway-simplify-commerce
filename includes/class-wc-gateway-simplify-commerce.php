@@ -398,7 +398,7 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 		// Are we saving a new payment method?
 		if ( is_user_logged_in() && isset( $_POST['wc-simplify_commerce-new-payment-method'] ) && true === (bool) $_POST['wc-simplify_commerce-new-payment-method'] ) {
 			$customer_info = array(
-				'email' => $order->billing_email,
+				'email' => version_compare( WC_VERSION, '3.0', '<' ) ? $order->billing_email : $order->get_billing_email(),
 				'name'  => trim( $order->get_formatted_billing_full_name() ),
 			);
 			$token = $this->save_token( $customer_token, $cart_token, $customer_info );
@@ -496,7 +496,7 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 	 * @return bool|WP_Error
 	 */
 	public function do_payment( $order, $amount = 0, $token = array() ) {
-		if ( $amount * 100 < 50 ) {
+		if ( absint( $amount * 100 ) < 50 ) {
 			return new WP_Error( 'simplify_error', __( 'Sorry, the minimum allowed order total is 0.50 to use this payment method.', 'woocommerce' ) );
 		}
 
@@ -506,7 +506,7 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 				'amount'              => $amount * 100, // In cents.
 				'description'         => sprintf( __( '%s - Order #%s', 'woocommerce' ), esc_html( get_bloginfo( 'name', 'display' ) ), $order->get_order_number() ),
 				'currency'            => strtoupper( get_woocommerce_currency() ),
-				'reference'           => $order->id
+				'reference'           => version_compare( WC_VERSION, '3.0', '<' ) ? $order->id : $order->get_id(),
 			);
 
 			$data = array_merge( $data, $token );
@@ -613,22 +613,25 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 	 * @return array
 	 */
 	protected function get_hosted_payments_args( $order ) {
+		$pre_wc_30 = version_compare( WC_VERSION, '3.0', '<' );
+		$order_id = $pre_wc_30 ? $order->id : $order->get_id();
+
 		$args = apply_filters( 'woocommerce_simplify_commerce_hosted_args', array(
 			'sc-key'          => $this->public_key,
-			'amount'          => $order->order_total * 100,
-			'reference'       => $order->id,
+			'amount'          => absint( $order->get_total() * 100 ),
+			'reference'       => $order_id,
 			'name'            => esc_html( get_bloginfo( 'name', 'display' ) ),
 			'description'     => sprintf( __( 'Order #%s', 'woocommerce' ), $order->get_order_number() ),
 			'receipt'         => 'false',
 			'color'           => $this->modal_color,
 			'redirect-url'    => WC()->api_request_url( 'WC_Gateway_Simplify_Commerce' ),
-			'address'         => $order->billing_address_1 . ' ' . $order->billing_address_2,
-			'address-city'    => $order->billing_city,
-			'address-state'   => $order->billing_state,
-			'address-zip'     => $order->billing_postcode,
-			'address-country' => $order->billing_country,
+			'address'         => $pre_wc_30 ? $order->billing_address_1 . ' ' . $order->billing_address_2 : $order->get_billing_address_1() . ' ' . $order->get_billing_address_2(),
+			'address-city'    => $pre_wc_30 ? $order->billing_city : $order->get_billing_city(),
+			'address-state'   => $pre_wc_30 ? $order->billing_state : $order->get_billing_state(),
+			'address-zip'     => $pre_wc_30 ? $order->billing_postcode : $order->get_billing_postcode(),
+			'address-country' => $pre_wc_30 ? $order->billing_country : $order->get_billing_country(),
 			'operation'       => 'create.payment',
-		), $order->id );
+		), $order_id );
 
 		return $args;
 	}
