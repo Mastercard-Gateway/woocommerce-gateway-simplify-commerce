@@ -1,9 +1,9 @@
 === WooCommerce Simplify Commerce Gateway ===
-Contributors: automattic, woothemes, akeda, allendav, royho, slash1andy, woosteve, spraveenitpro, mikedmoore, fernashes, shellbeezy, mikejolley, danieldudzic, dsmithweb
+Contributors: automattic, woothemes, akeda, allendav, royho, slash1andy, woosteve, spraveenitpro, mikedmoore, fernashes, shellbeezy, mikejolley, danieldudzic, dsmithweb, bor0
 Tags: credit card, simplify commerce, woocommerce, mastercard
 Requires at least: 4.4
 Tested up to: 4.5
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -90,6 +90,9 @@ If you get stuck, you can ask for help in the Plugin Forum.
 2. Normal checkout with Simplify commerce.
 
 == Changelog ==
+
+= 1.0.3 =
+* Update for WC 3.0 compatibility.
 
 = 1.0.2 =
 * Fix javascript tokenization on guest checkout.
