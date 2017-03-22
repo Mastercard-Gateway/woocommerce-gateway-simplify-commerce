@@ -496,7 +496,7 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 	 * @return bool|WP_Error
 	 */
 	public function do_payment( $order, $amount = 0, $token = array() ) {
-		if ( absint( $amount * 100 ) < 50 ) {
+		if ( $amount * 100 < 50 ) {
 			return new WP_Error( 'simplify_error', __( 'Sorry, the minimum allowed order total is 0.50 to use this payment method.', 'woocommerce' ) );
 		}
 
@@ -618,7 +618,7 @@ class WC_Gateway_Simplify_Commerce extends WC_Payment_Gateway_CC {
 
 		$args = apply_filters( 'woocommerce_simplify_commerce_hosted_args', array(
 			'sc-key'          => $this->public_key,
-			'amount'          => absint( $order->get_total() * 100 ),
+			'amount'          => $order->get_total() * 100,
 			'reference'       => $order_id,
 			'name'            => esc_html( get_bloginfo( 'name', 'display' ) ),
 			'description'     => sprintf( __( 'Order #%s', 'woocommerce' ), $order->get_order_number() ),
