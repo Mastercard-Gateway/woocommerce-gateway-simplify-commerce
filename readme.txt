@@ -1,11 +1,12 @@
-=== WooCommerce Simplify Commerce Gateway ===
-Contributors: automattic, woothemes, akeda, allendav, royho, slash1andy, woosteve, spraveenitpro, mikedmoore, fernashes, shellbeezy, mikejolley, danieldudzic, dsmithweb, bor0
+=== Simplify Commerce Gateway for WooCommerce===
+Copyrights held by [Mastercard?]
+Thanks to all of the original contributors: automattic, woothemes, akeda, allendav, royho, slash1andy, woosteve, spraveenitpro, mikedmoore, fernashes, shellbeezy, mikejolley, danieldudzic, dsmithweb, bor0. All original contributions licensed under GPLv3.
 Tags: credit card, simplify commerce, woocommerce, mastercard
 Requires at least: 4.4
 Tested up to: 4.5
 Stable tag: 1.0.3
 License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License URL: http://www.gnu.org/licenses/gpl-3.0.html
 
 The Simplify Commerce gateway for WooCommerce 2.6+ lets you to take credit card payments directly on your store.
 
@@ -47,7 +48,7 @@ Please note, this gateway requires WooCommerce 2.6 and above. Prior to 2.6, Simp
 Automatic installation is the easiest option as WordPress handles the file transfers itself and you don’t need to leave your web browser. To
 do an automatic install of, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
 
-In the search field type “WooCommerce Simplify Commerce Gateway” and click Search Plugins. Once you’ve found our plugin you can view details
+In the search field type “Simplify Commerce Gateway for WooCommerce” and click Search Plugins. Once you’ve found our plugin you can view details
 about it such as the point release, rating and description. Most importantly of course, you can install it by simply clicking “Install Now”.
 
 = Manual installation =
