@@ -4,7 +4,7 @@ Thanks to all of the original contributors: automattic, woothemes, akeda, allend
 Tags: credit card, simplify commerce, woocommerce, mastercard
 Requires at least: 4.4
 Tested up to: 4.5
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv3
 License URL: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -91,6 +91,9 @@ If you get stuck, you can ask for help in the Plugin Forum.
 2. Normal checkout with Simplify commerce.
 
 == Changelog ==
+
+= 1.0.4 =
+* Update - Change in authorship.
 
 = 1.0.3 =
 * Update for WC 3.0 compatibility.
